@@ -7,10 +7,17 @@ class BookService {
     autoBind(this);
     this.#model = BookModel;
   }
-  async create(title, price, description) {
+  async create(title, price, discount, description) {
+    let newPrice;
+    if (discount) {
+      const result = (price * discount) / 100;
+      newPrice = price - result;
+    }
     const newBook = await this.#model.create({
       title,
-      price,
+      orginalPrice: price,
+      price: newPrice || price,
+      discount,
       description,
     });
     return {

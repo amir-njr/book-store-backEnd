@@ -9,8 +9,14 @@ class BookController {
   }
   async create(req, res, next) {
     try {
-      const { title, price, description } = req.body;
-      const book = await this.#service.create(title, price, description);
+      const { title, price, discount, description } = req.body;
+      
+      const book = await this.#service.create(
+        title,
+        price,
+        discount,
+        description
+      );
       res.send(book);
     } catch (error) {
       next(error);
@@ -44,31 +50,6 @@ class BookController {
       next(error);
     }
   }
-  // async allUsers(req, res, next) {
-  //   try {
-  //     const users = await this.#service.allUsers();
-  //     res.status(200).json({ count: users.length, users });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
-  // async deleteById(req, res, next) {
-  //   try {
-  //     const { id } = req.params;
-  //     await this.#service.deleteById(id);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
-  // async update(req, res, next) {
-  //   try {
-  //     const { id } = req.params;
-  //     const { fullName, email } = req.body;
-  //     await this.#service.update(id, fullName, email);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
 }
 
 module.exports = new BookController();

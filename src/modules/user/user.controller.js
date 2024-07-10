@@ -1,4 +1,3 @@
-const NodeEnv = require("../../common/constant/env.enum");
 const userService = require("./user.service");
 const autoBind = require("auto-bind");
 
@@ -21,16 +20,10 @@ class UserController {
     try {
       const { email, password } = req.body;
       const token = await this.#service.signIn(email, password);
-      return res
-        .cookie("access_token", token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === NodeEnv.Production,
-        })
-        .status(200)
-        .json({
-          message: "با موفقیت وارد شدید ...",
-          accessToken: token,
-        });
+      res.json({
+        token,
+        message: "با موفقیت وارد شدید ...",
+      });
     } catch (error) {
       next(error);
     }
@@ -56,6 +49,14 @@ class UserController {
     try {
       const { id } = req.params;
       await this.#service.deleteById(id);
+    } catch (error) {
+      next(error);
+    }
+  }
+  async whoIs(req, res, next) {
+    try {
+      const user = await this.#service.whoIs(req);
+      res.send(user);
     } catch (error) {
       next(error);
     }

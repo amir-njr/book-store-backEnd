@@ -1,8 +1,8 @@
 const autoBind = require("auto-bind");
-const userMessage = require("./user.messages");
 const jwt = require("jsonwebtoken");
 const { hashPassword, compairePassword } = require("../../common/utils/hash");
 const UserModel = require("./user.model");
+require("dotenv").config();
 
 class UserService {
   #model;
@@ -75,6 +75,16 @@ class UserService {
       status: 202,
       message: "کاربر مورد نظر با موفقیت حذف شد ...",
     };
+  }
+  async whoIs(req) {
+    const [, token] = req?.headers?.authorization?.split(" ");
+    const userData = this.verifyToken(token);
+    const user = await this.#model.findOne({ _id: userData.userId });
+    return user
+  }
+  verifyToken(token) {
+    const data = jwt.verify(token, process.env.SECRET_KEY);
+    return data;
   }
 }
 
