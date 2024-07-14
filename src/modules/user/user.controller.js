@@ -61,6 +61,16 @@ class UserController {
       next(error);
     }
   }
+  async getPeymentData(req, res, next) {
+    const { email } = req.body;
+    try {
+      const user = await this.#service.getPeymentData(email);
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }
 
 module.exports = new UserController();

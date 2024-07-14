@@ -1,26 +1,20 @@
 /**
  * @swagger
  * tags:
- *  name: User
- *  description: User Modules And Routes
+ *  name: Card Nummer
+ *  description: Card Modules And Routes
  */
 
 /**
  * @swagger
  *  components:
  *      schemas:
- *          registerUser:
+ *          isShoppingCard:
  *              type: object
  *              required:
- *                  -   fullName
- *                  -   email
- *                  -   password
+ *                  -   cardNumber
  *              properties:
- *                  fullName:
- *                      type: string
- *                  email:
- *                      type: string
- *                  password:
+ *                  cardNumber:
  *                      type: string
  *
  */
@@ -28,16 +22,16 @@
 /**
  * @swagger
  *
- * /user/sign-up:
+ * /card/is-card:
  *  post:
- *      summary: Register User
+ *      summary: Is Card Number In DB ????
  *      tags:
- *          -   User
+ *          -   Card Nummer
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: "#/components/schemas/registerUser"
+ *                      $ref: "#/components/schemas/isShoppingCard"
  *      responses:
  *          200:
  *              description: success
@@ -48,15 +42,12 @@
  * @swagger
  *  components:
  *      schemas:
- *          loginUser:
+ *          createShoppingCard:
  *              type: object
  *              required:
- *                  -   email
- *                  -   password
+ *                  -   cardNumber
  *              properties:
- *                  email:
- *                      type: string
- *                  password:
+ *                  cardNumber:
  *                      type: string
  *
  */
@@ -64,102 +55,16 @@
 /**
  * @swagger
  *
- * /user/sign-in:
+ * /card/create:
  *  post:
- *      summary: Login User
+ *      summary: Create Card Number In DB
  *      tags:
- *          -   User
+ *          -   Card Nummer
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: "#/components/schemas/loginUser"
- *      responses:
- *          200:
- *              description: success
- *
- */
-
-/**
- * @swagger
- *
- * /user/users:
- *  get:
- *      summary: Get All Users
- *      tags:
- *          -   User
- *      responses:
- *          200:
- *              description: success
- *
- */
-
-/**
- * @swagger
- *  components:
- *      schemas:
- *          updateUser:
- *              type: object
- *              required:
- *                  -   id
- *                  -   fullName
- *                  -    email
- *              properties:
- *                  id:
- *                      type: string
- *                  fullName:
- *                      type: string
- *                  email:
- *                      type: string
- *
- */
-
-/**
- * @swagger
- *
- * /user/update:
- *  patch:
- *      summary: Update User
- *      tags:
- *          -   User
- *      requestBody:
- *          content:
- *              application/x-www-form-urlencoded:
- *                  schema:
- *                      $ref: "#/components/schemas/updateUser"
- *      responses:
- *          200:
- *              description: success
- *
- */
-
-/**
- * @swagger
- *  components:
- *      schemas:
- *          deleteUser:
- *              type: object
- *              required:
- *                  -   id
- *              properties:
- *                  id:
- *                      type: string
- *
- */
-
-/**
- * @swagger
- *
- * /user/delete-one:
- *  delete:
- *      summary: Delete User
- *      tags:
- *          -   User
- *      requestBody:
- *          content:
- *              application/x-www-form-urlencoded:
- *                  schema:
- *                      $ref: "#/components/schemas/deleteUser"
+ *                      $ref: "#/components/schemas/createShoppingCard"
  *      responses:
  *          200:
  *              description: success

@@ -12,10 +12,12 @@ class shoppingCardService {
     if (!card)
       throw {
         status: 404,
+        message: "Not Found",
       };
     else
       throw {
         status: 200,
+        message: "Found",
       };
   }
 
@@ -23,6 +25,7 @@ class shoppingCardService {
     await this.#model.create({ cardNumber });
     throw {
       status: 200,
+      message: "Create Card SuccessFull",
     };
   }
 }

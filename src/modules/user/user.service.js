@@ -80,11 +80,31 @@ class UserService {
     const [, token] = req?.headers?.authorization?.split(" ");
     const userData = this.verifyToken(token);
     const user = await this.#model.findOne({ _id: userData.userId });
-    return user
+    return user;
   }
   verifyToken(token) {
     const data = jwt.verify(token, process.env.SECRET_KEY);
     return data;
+  }
+  async getPeymentData(email) {
+    const user = await this.#model.aggregate([
+      { $match: { email: email } },
+      {
+        $lookup: {
+          from: "datas",
+          foreignField: "userId",
+          localField: "_id",
+          as: "myBooks",
+        },
+      },
+    ]);
+    const [profile] = user;
+    const [userPeyments] = profile.myBooks;
+    return {
+      status: 200,
+      message: "اطلاعات با موفقیت ارسال شد ...",
+      myBooks: userPeyments.bought,
+    };
   }
 }
 
