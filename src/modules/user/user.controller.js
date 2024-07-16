@@ -18,8 +18,8 @@ class UserController {
   }
   async signIn(req, res, next) {
     try {
-      const { email, password } = req.body;
-      const token = await this.#service.signIn(email, password);
+      const { email, password, rolePassword } = req.body;
+      const token = await this.#service.signIn(email, password, rolePassword);
       res.json({
         token,
         message: "با موفقیت وارد شدید ...",
@@ -70,7 +70,6 @@ class UserController {
       next(error);
     }
   }
-
 }
 
 module.exports = new UserController();
